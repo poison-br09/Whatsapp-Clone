@@ -1,17 +1,20 @@
-import { Box } from '@mui/material';
+import { useContext } from "react";
 
+import { Box } from "@mui/material";
 
-import ChatHeader from './ChatHeader';
-import Message from './Messages';
+import { AccountContext } from "../../../context/AccountProvider";
+
+import ChatHeader from "./ChatHeader";
+import Message from "./Messages";
 
 const ChatBox = () => {
-    return (
-        // <div> This is a Component</div>
-        <Box style={{height: '75%'}}>
-            <ChatHeader />
-            <Message />
-        </Box>
-    )
-}
+  const { person } = useContext(AccountContext);
+  return (
+    <Box style={{ height: "75%" }}>
+      <ChatHeader person={person} />
+      <Message person={person} />
+    </Box>
+  );
+};
 
 export default ChatBox;

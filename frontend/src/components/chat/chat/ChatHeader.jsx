@@ -36,13 +36,13 @@ const RightContainer = styled(Box)`
     }
 `;
 
-const ChatHeader = () => {
+const ChatHeader = (person) => {
   return (
     <Header>
-      <Image src={""} alt="dp" />
+      <Image src={person.name} alt="dp" />
       <Box>
-        <Name>Name</Name>
-        <OnlineStatus>Online Status</OnlineStatus>
+        <Name>{person.name}</Name>
+        <OnlineStatus>Offline</OnlineStatus>
       </Box>
       <RightContainer>
         <Search />
