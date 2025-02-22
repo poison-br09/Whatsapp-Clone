@@ -46,7 +46,7 @@ const Search = ({setText}) => {
                 </Icon>
                 <InputField
                     placeholder='Search or Start new chat'
-                    onChange={()=>setText(e.target.value)}
+                    onChange={(e)=>setText(e.target.value)}
                 />
             </Wrapper>
         </Component>
