@@ -14,7 +14,7 @@ conn.once("open", () => {
   });
   gfs = grid(conn.db, mongoose.mongo);
   gfs.collection("fs");
-});
+}); 
 
 export const uploadFile = async (request, response) => {
   if (!request.file) {
