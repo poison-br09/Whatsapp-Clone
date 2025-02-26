@@ -30,6 +30,8 @@ const Messages = ({ person, conversation }) => {
 
   const [newMessageFlag, setNewMessageFlag] = useState(false);
 
+  const [file, setFile] = useState();
+
   const { account } = useContext(AccountContext);
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const Messages = ({ person, conversation }) => {
           ))}
       </Component>
 
-      <Footer sendText={sendText} setText={setText} value={text} />
+      <Footer sendText={sendText} setText={setText} value={text} file={file} />
     </Wrapper>
   );
 };
