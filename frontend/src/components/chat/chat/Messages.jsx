@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 
 import { Box, styled } from "@mui/material";
 
@@ -32,9 +32,27 @@ const Messages = ({ person, conversation }) => {
 
   const [file, setFile] = useState();
 
-  const { account } = useContext(AccountContext);
+  const { account, socket } = useContext(AccountContext);
 
   const [image, setImage] = useState();
+  const [incomingMessage, setIncomingMessage] = useState(null);
+
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    incomingMessage &&
+      conversation?.members?.includes(incomingMessage.senderId) &&
+      setMessages((prev) => [...prev, incomingMessage]);
+  }, [incomingMessage]);
+
+  useEffect(() => {
+    socket.current.on("getMessage", (data) => {
+      setIncomingMessage({
+        ...data,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
 
   useEffect(() => {
     const getMessageDetails = async () => {
@@ -43,6 +61,10 @@ const Messages = ({ person, conversation }) => {
     };
     conversation._id && getMessageDetails();
   }, [person._id, conversation._id, newMessageFlag]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ transition: "smooth" });
+  }, [messages]);
 
   const sendText = async (e) => {
     const code = e.keyCode || e.which;
@@ -67,6 +89,7 @@ const Messages = ({ person, conversation }) => {
         };
       }
 
+      socket.current.emit("send_message", message);
       await newMessage(message);
 
       setText("");
@@ -80,7 +103,7 @@ const Messages = ({ person, conversation }) => {
       <Component>
         {messages &&
           messages.map((message) => (
-            <Container>
+            <Container ref={scrollRef}>
               <Message message={message} />
             </Container>
           ))}
