@@ -1,10 +1,10 @@
 import React from "react"; // Import React for JSX
 import { useContext } from "react";
 import { AppBar, Toolbar, styled, Box } from "@mui/material"; // Import AppBar, Toolbar, Typography from Material-UI
+import { AccountContext } from "../context/AccountProvider";
 
 // components
 import LoginDialog from "./account/LoginDialog";
-import { AccountContext } from "../context/AccountProvider";
 import ChatDialog from "./chat/ChatDialog";
 
 const Component = styled(Box)`
@@ -26,30 +26,27 @@ const Header = styled(AppBar)`
 
 const Messenger = () => {
   const { account } = useContext(AccountContext);
-  const [openChat, setOpenChat] = React.useState(true); // Ensure openChat is always defined
+  const [openChat, setOpenChat] = React.useState(account ? true : false); // Open chat only if account exists
 
   return (
-    <>
       <Component>
-        {account ? (
-          <>
-            <Header>
-              <Toolbar></Toolbar>
-            </Header>
-            <ChatDialog open={openChat} onClose={() => setOpenChat(false)} /> {/* Pass open & onClose */}
-          </>
-        ) : (
-          <>
-            <LoginHeader>
-              <Toolbar></Toolbar>
-            </LoginHeader>
-            <LoginDialog />
-          </>
-        )}
+          {account ? (
+              <>
+                  <Header>
+                      <Toolbar></Toolbar>
+                  </Header>
+                  <ChatDialog open={openChat} onClose={() => setOpenChat(false)} />
+              </>
+          ) : (
+              <>
+                  <LoginHeader>
+                      <Toolbar></Toolbar>
+                  </LoginHeader>
+                  <LoginDialog />
+              </>
+          )}
       </Component>
-    </>
   );
 };
-
 
 export default Messenger; // Export the Messenger component

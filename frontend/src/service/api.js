@@ -45,7 +45,7 @@ export const newMessage = async (data) => {
   }
 };
 
-export const getMessages = async () => {
+export const getMessages = async (id) => {
   try {
     let response = await axios.get(`${url}/message/get/${id}`);
     return response.data;

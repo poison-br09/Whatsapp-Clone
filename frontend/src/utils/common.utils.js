@@ -5,7 +5,7 @@ export const downloadMedia = (e, originalImage) => {
     fetch(originalImage)
       .then((resp) => resp.blob())
       .then((blob) => {
-        const url = window.URL.createObjectURL(bolb);
+        const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.style.display = "none";
         a.href = url;
@@ -24,7 +24,7 @@ export const downloadMedia = (e, originalImage) => {
   }
 };
 
-export const formateDate = (date) => {
+export const formatDate = (date) => {
   const hours = new Date(date).getHours();
   const minutes = new Date(date).getMinutes();
 

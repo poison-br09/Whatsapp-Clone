@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { Box, Typography, styled } from "@mui/material";
 import GetAppIcon from "@mui/icons-material/GetApp";
 
-import { formateDate , downloadMedia} from "../../../utils/common.utils";
+import { formatDate , downloadMedia} from "../../../utils/common.utils";
 
 import { AccountContext } from "../../../context/AccountProvider";
-import { iconPDF } from "../../../context/AccountProvider";
+import { iconPDF } from "../../../constants/data";
 
 const Own = styled(Box)`
   background: #dcf8c6;
@@ -91,7 +91,7 @@ const ImageMessage = ({ message }) => {
           }}
           fontSize="small"
         />
-        {formateDate(message.createdAt)}
+        {formatDate(message.createdAt)}
       </Time>
     </Box>
   );
@@ -101,7 +101,7 @@ const TextMessage = ({ message }) => {
   return (
     <>
       <Text>{message.text}</Text>
-      <Time>{formateDate(message.createdAt)}</Time>
+      <Time>{formatDate(message.createdAt)}</Time>
     </>
   );
 };
