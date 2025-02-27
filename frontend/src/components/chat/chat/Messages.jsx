@@ -28,11 +28,10 @@ const Messages = ({ person, conversation }) => {
 
   const [messages, setMessages] = useState([]);
 
-  const [newMessageFlag, setNewMessageFlag] = useState(false);
-
   const [file, setFile] = useState();
 
-  const { account, socket } = useContext(AccountContext);
+  const { account, socket, newMessageFlag, setNewMessageFlag } =
+    useContext(AccountContext);
 
   const [image, setImage] = useState();
   const [incomingMessage, setIncomingMessage] = useState(null);
